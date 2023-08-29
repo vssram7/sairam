@@ -1,0 +1,85 @@
+<template>
+    <template if:false={loggedDoctor}>
+        <lightning-card class="cardStyle slds-align_absolute-center" title="Welcome co Collabera Health ">
+            <div class="headigStyle">
+                <lightning-input label="Enter Id" class="inputStyle slds-align_absolute-center"
+                    onchange={handleIdChange}></lightning-input><br>
+                <lightning-button variant="brand" label="Enter" onclick={handleEnterClick}
+                    class="slds-m-left_xx-large"></lightning-button><br>
+            </div>
+        </lightning-card>
+    </template>
+
+    <template if:true={loggedDoctor}>
+        <lightning-card>
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                    <br> <img class="imgStyle slds-m-around_small" src={loggedDoctor.Profile_photo_link__c}
+                        alt={loggedDoctor.Name} />
+                </div>
+                <div class="slds-col slds-m-top_x-large">
+                    {loggedDoctor.Doctor_Name__c}
+                </div>
+                <div class="slds-col slds-m-top_x-large">
+                    <b>Speciality:</b> {loggedDoctor.Specialization__c}
+                </div>
+                <div class="slds-col slds-m-top_x-large">
+                    <strong>Consultation fee: </strong> ₹ {loggedDoctor.Consultation_Fee__c}/-
+                </div>
+            </div>
+        </lightning-card>
+    </template>
+
+
+    <template if:true={isTabsVisible}>
+        <lightning-tabset variant="scoped" class="tab-active">
+            <lightning-tab label="Today's Appointments">
+                <lightning-datatable data={appointmentNewData} columns={appointmentColumns} key-field="Id"
+                    onrowaction={handlePatientHistoryClick}>
+                </lightning-datatable>
+            </lightning-tab>
+
+            <lightning-tab label="UpComing appointments">
+                <lightning-datatable data={apointmentUpData} columns={appointmentColumns} key-field="Id"
+                    onrowaction={handlePatientHistoryClick}>
+                </lightning-datatable>
+            </lightning-tab>
+
+            <lightning-tab label="Past appointments">
+                <lightning-datatable data={apointmentOldData} columns={appointmentColumns} key-field="Id"
+                    onrowaction={handlePatientHistoryClick}>
+                </lightning-datatable>
+            </lightning-tab>
+        </lightning-tabset>
+    </template>
+
+    <template if:true={isExitVisible}>
+        <lightning-button variant="brand" label="EXIT" onclick={handleExitClick}
+            class="slds-align_absolute-center"></lightning-button>
+    </template>
+
+
+    <template if:true={showPatientHistory}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="false"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <!-- Header Start -->
+                <header class="slds-modal__header">
+                    <lightning-button-icon class="slds-modal__close" title="Close" icon-name="utility:close"
+                        icon-class="slds-button_icon-inverse" onclick={handleDialogClose}></lightning-button-icon>
+
+                    <h2 class="slds-text-heading_medium slds-hyphenate header-string">
+                        Patient Medical History
+                    </h2>
+                </header>
+                <!-- Header End -->
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-4">
+                    <lightning-datatable data={appointmentRelatedOldData} columns={RelatedappointmentColumns}
+                        key-field="Id"></lightning-datatable>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+</template>

@@ -1,0 +1,14 @@
+<template>
+    <template for:each={getDoctor} for:item="docList">
+        <div class="customTileBox slds-box" key={docList.Id}>
+            <!-- <strong>Doctor Name: </strong> {docList.Name}<br>
+            <strong>Specialization: </strong> {docList.Id}<br> -->
+            <div class="docProfile">
+                <img style="width:60px; height:auto" src={docList.Profile_photo_link__c} />
+            </div>
+            <h1>{docList.Specialization__c}</h1>
+            <a name={docList.Name} variant="brand" label={docList.Name} title="View Doctor Profile"
+                onclick={handleViewProfileClick} class="slds-m-left_x-small">{docList.Name}</a>
+        </div>
+    </template>
+</template>

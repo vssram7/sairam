@@ -1,0 +1,23 @@
+.cardStyle {
+    width: 50%;
+    color: blue;
+}
+
+.headigStyle {
+    font-style: oblique;
+    font-size: larger;
+}
+
+.inputStyle {
+    width: fit-content;
+    margin-left: 2px;
+}
+
+.tab-active {
+    --slds-c-tabs-scoped-color-text-active: red;
+}
+
+.imgStyle {
+    height: 100px;
+    width: 100px;
+}

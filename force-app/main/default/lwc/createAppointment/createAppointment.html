@@ -1,0 +1,35 @@
+<template>
+
+    <lightning-card>
+        <lightning-record-edit-form object-api-name={objectName} onsubmit={successHandler}>
+            <lightning-messages></lightning-messages>
+            <div class="slds-grid slds-wrap">
+                <div class="slds-col slds-size_1-of-1">
+                    <span> <lightning-input-field field-name={fields.patientField}></lightning-input-field></span>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <span> <lightning-input-field field-name={fields.doctorField}></lightning-input-field></span>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <span> <lightning-input-field field-name={fields.aDateField}></lightning-input-field></span>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                    <span> <lightning-input-field field-name={fields.aTimeField}></lightning-input-field></span>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <span> <lightning-input-field field-name={fields.medicalField}></lightning-input-field></span>
+                </div>
+                <div class="slds-col slds-size_1-of-1">
+                    <span> <lightning-input-field field-name={fields.STATUS_FIELD}></lightning-input-field></span>
+                </div>
+            </div>
+            <div class="slds-align_absolute-center">
+                <lightning-button onclick={handleCancel} class="slds-m-around_xx-small"
+                    label="cancel"></lightning-button>
+                <lightning-button variant="brand" type="submit" class="slds-m-around_xx-small"
+                    label="Save"></lightning-button>
+            </div>
+        </lightning-record-edit-form>
+    </lightning-card>
+
+</template>

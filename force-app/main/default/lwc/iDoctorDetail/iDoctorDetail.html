@@ -1,0 +1,18 @@
+<template>
+    <lightning-card class="hello" title={doctorName} icon-name="standard:visits">
+        <template if:true={recievedMessage}>
+            <div class="slds-m-horizontal_medium">
+                <div class="slds-align_absolute-center">
+                    <img src={PictureUrl} alt="Car picture" />
+                </div> <br><br>
+                <Strong>Speciality&nbsp;:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{speciality}</Strong>
+                <lightning-record-view-form onload={handleRecordLoaded} record-id={recievedMessage}
+                    object-api-name="Doctor__c" density="compact">
+                </lightning-record-view-form>
+            </div>
+        </template>
+        <template if:false={recievedMessage}>
+            <p>Select a Doctor to see details</p>
+        </template>
+    </lightning-card>
+</template>

@@ -1,0 +1,23 @@
+.customTileBox {
+    background: #ddd;
+    padding: 4px 8px;
+    width: 180px;
+    height: auto;
+    border-radius: 4px;
+    float: left;
+    margin: 2px;
+}
+
+.docProfile {
+    width: 60px;
+    margin: auto;
+
+}
+
+.docProfile img {
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+}

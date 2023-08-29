@@ -1,0 +1,14 @@
+.cardStyle {
+    font-style: italic;
+    color: blue;
+
+}
+
+.isAvailable {
+    width: 15px;
+    height: 15px;
+}
+
+.doctorimage {
+    border-radius: 200%;
+}

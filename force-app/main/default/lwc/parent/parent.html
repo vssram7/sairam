@@ -1,0 +1,36 @@
+<template>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_8-of-12">
+            <c-child get-doctor={getDoctor} onselect={handleDoctor}></c-child>
+        </div>
+        <div class="slds-col slds-size_4-of-12">
+
+            <template if:true={clickDoctorDetail}>
+                <lightning-card class="hello" title={selectedDoctor} icon-name="standard:visits">
+                    <template if:true={selectedDoctor}>
+                        <div class="slds-m-horizontal_medium">
+                            <div class="slds-align_absolute-center">
+                                <img src={selectedDoctor.Profile_photo_link__c} alt={selectedDoctor.Name} />
+                            </div> <br><br>
+                            <Strong>Speciality:{selectedDoctor.Specialization__c}</Strong>
+
+                            <template if:true={doctorAvailable}>
+                                <lightning-button variant="brand" label="Book Appointment" title="Book Appointment"
+                                    onclick={handleBookAppointmentClick} class="slds-m-left_x-small"></lightning-button>
+                            </template>
+                            <template if:false={doctorAvailable}>
+                                <lightning-button variant="brand" label="Book Appointment" title="Book Appointment"
+                                    onclick={handleBookAppointmentClick} class="slds-m-left_x-small"
+                                    disabled="true"></lightning-button>
+                            </template>
+                        </div>
+
+                    </template>
+                    <template if:false={selectedDoctor}>
+                        <p>Select a Doctor to see details</p>
+                    </template>
+                </lightning-card>
+            </template>
+        </div>
+    </div>
+</template>

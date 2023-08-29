@@ -1,0 +1,42 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-combobox onchange={handlePatientNameChange} value={patientname} label="Patient Name"
+                    placeholder="select your name" options={patientOptions}></lightning-combobox>
+                <!-- <lightning-input label="Patient Name" value={patientName} required="true"
+                    onchange={handlePatientNameChange}></lightning-input> -->
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-input label="Doctor Name" value={doctorName} required="true"
+                    onchange={handleDoctorNameChange}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-input label="Appointment Date" type="date" required="true"
+                    onchange={handleDateChange}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-combobox name="AppointmentTime" label="Appointment Time" options={timeOptions}
+                    onchange={handleTimeChange}></lightning-combobox>
+                <!-- <lightning-input label="Appointment Time" value={Name} required="true"
+                    onchange={handleTimeChange}></lightning-input> -->
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-input label="Medical Problem" value={Name} required="true"
+                    onchange={handleProblemChange}></lightning-input>
+            </div>
+            <div class="slds-col slds-size_1-of-1">
+                <lightning-combobox name="status" label="Status" options={statusOptions}
+                    onchange={handleStatusChange}></lightning-combobox>
+                <!-- <lightning-input label="Status" value={Name} required="true"
+                    onchange={handleStatusChange}></lightning-input> -->
+            </div>
+        </div>
+        <div class="slds-align_absolute-center" style="height:5rem">
+
+            <lightning-button label="Cancel" variant="brand"
+                onclick={handleCloseAppointment}></lightning-button>&nbsp;&nbsp;&nbsp;
+            <lightning-button label="Submit" variant="brand" onclick={handleFormSubmit}></lightning-button>
+        </div>
+    </lightning-card>
+</template>

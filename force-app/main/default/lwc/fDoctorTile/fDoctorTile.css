@@ -1,0 +1,19 @@
+.doctorimage {
+    border-radius: 20%;
+    width: 75px;
+    height: 75px;
+}
+
+.isAvailable {
+    width: 15px;
+    height: 15px;
+}
+
+.cardStyle {
+    color: teal;
+    background-color: darkcyan;
+}
+
+.slds-card {
+    background-color: darkcyan;
+}

@@ -1,0 +1,125 @@
+<template>
+    <div class="slds-grid slds-gutters">
+        <!-- list of doctors starts here -->
+        <div class="slds-col slds-size_8-of-12">
+            <lightning-card icon-name="utility:list" title="Doctors List">
+                <div class=" mystyle slds-var-m-around_medium">
+                    <lightning-input type="search" onchange={handleKeyChange} class="slds-var-m-bottom_small"
+                        label="Search by Doctor name or Specialization" value={searchKey}></lightning-input>
+                </div>
+            </lightning-card>
+
+            <c-f-doctor-tile get-doctor={getDoctor} onselect={handleDoctor}></c-f-doctor-tile>
+
+        </div>
+        <!-- List of doctors ends here -->
+        <!-- Doctor detail starts here -->
+        <div class="slds-col slds-size_4-of-12">
+            <template if:true={selectedDoctor}>
+                <lightning-card class="cardStyle" title={selectedDoctor.Doctor_Name__c} icon-name="standard:visits">
+
+                    <div class="slds-m-horizontal_medium" style="background-color:lavender;">
+                        <div class="slds-align_absolute-center">
+                            <img class="doctorimage" src={selectedDoctor.Profile_photo_link__c}
+                                alt={selectedDoctor.Name} />
+                        </div> <br><br>
+                        <template if:true={doctorAvailable}>
+                            <lightning-button variant="brand" label="Book Appointment" title="Book Appointment"
+                                onclick={handleBookAppointmentClick}
+                                class="slds-align_absolute-center"></lightning-button>
+                        </template>
+                        <template if:false={doctorAvailable}>
+                            <lightning-button variant="brand" label="Book Appointment" title="Book Appointment"
+                                onclick={handleBookAppointmentClick} class=" slds-align_absolute-center"
+                                disabled="true"></lightning-button>
+                        </template><br>
+                        <lightning-output-field field-name="Speciality" value={selectedDoctor.Specialization__c}>
+                        </lightning-output-field>
+                        <Strong>Speciality:</Strong>
+                        {selectedDoctor.Specialization__c}<br>
+                        <strong>Experience: </strong> {selectedDoctor.Experience__c} years<br>
+                        <strong>Consultation fee: </strong> ₹ {selectedDoctor.Consultation_Fee__c}/-<br>
+                        <strong>Rating: </strong> {selectedDoctor.Rating__c}<br>
+                        <strong>Available: </strong> <template lwc:if={selectedDoctor.Avalable__c}><img
+                                class="isAvailable"
+                                src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/checkbox.png" /></template>
+                        <template lwc:else><img class="isAvailable"
+                                src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-red-cross-symbol-icon-as-delete-remove-fail-failure-or-incorrect-answer-icon.jpg" /></template>
+                    </div>
+                    <template if:false={selectedDoctor}>
+                        <p>Select a Doctor to see details</p>
+                    </template>
+                </lightning-card>
+            </template>
+        </div>
+        <!-- Doctor detail ends here -->
+        <!-- Modal popup to book an appointment -->
+        <template if:true={showNewAppointment}>
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <!-- Header Start -->
+                    <header class="slds-modal__header">
+                        <lightning-button-icon class="slds-modal__close" title="Close" icon-name="utility:close"
+                            icon-class="slds-button_icon-inverse" onclick={handleDialogClose}></lightning-button-icon>
+
+                        <h2 class="slds-text-heading_medium slds-hyphenate header-string">
+                            Create new Appointment
+                        </h2>
+                    </header>
+                    <!-- Header End -->
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-4">
+
+                        <!-- <c-create-appointment></c-create-appointment> -->
+
+                        <lightning-card>
+                            <div class="slds-grid slds-wrap">
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning-combobox onchange={handlePatientNameChange} value={patientname}
+                                        label="Patient Name" placeholder="select your name"
+                                        options={patientOptions}></lightning-combobox>
+                                    <!-- <lightning-input label="Patient Name" value={patientName} required="true"
+                                        onchange={handlePatientNameChange}></lightning-input> -->
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning-input label="Doctor Name" value={doctorName} required="true"
+                                        onchange={handleDoctorNameChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-input label="Appointment Date" type="date" required="true"
+                                        onchange={handleDateChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2">
+                                    <lightning-combobox name="AppointmentTime" label="Appointment Time"
+                                        options={timeOptions} onchange={handleTimeChange}></lightning-combobox>
+                                    <!-- <lightning-input label="Appointment Time" value={Name} required="true"
+                                        onchange={handleTimeChange}></lightning-input> -->
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning-input label="Medical Problem" value={Name} required="true"
+                                        onchange={handleProblemChange}></lightning-input>
+                                </div>
+                                <div class="slds-col slds-size_1-of-1">
+                                    <lightning-combobox name="status" label="Status" options={statusOptions}
+                                        onchange={handleStatusChange}></lightning-combobox>
+                                    <!-- <lightning-input label="Status" value={Name} required="true"
+                                        onchange={handleStatusChange}></lightning-input> -->
+                                </div>
+                            </div>
+                            <div class="slds-align_absolute-center" style="height:5rem">
+
+                                <lightning-button label="Cancel" variant="brand"
+                                    onclick={handleCloseAppointment}></lightning-button>&nbsp;&nbsp;&nbsp;
+                                <lightning-button label="Submit" variant="brand"
+                                    onclick={handleFormSubmit}></lightning-button>
+                            </div>
+                        </lightning-card>
+
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </template>
+
+    </div>
+</template>

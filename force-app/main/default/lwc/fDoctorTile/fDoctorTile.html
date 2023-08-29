@@ -1,0 +1,33 @@
+<template>
+    <template if:true={getDoctor}>
+        <template for:each={getDoctor} for:item="doctor">
+            <lightning-card key={doctor.Id} class="cardStyle slds-c-card-shadow" onload={handleLoad}>
+                <div class="slds-grid slds-gutters">
+                    <!--div for doctor profile picture starts here -->
+                    <div class="slds-col slds-size_2-of-12 slds-m-around_large">
+                        <span><img class="doctorimage" src={doctor.Profile_photo_link__c} /></span>
+                    </div>
+                    <!--div for doctor profile picture ends here -->
+                    <!--div for doctor profile detail starts here -->
+                    <div
+                        class="slds-col slds-size_4-of-12 slds-m-around_large slds-box slds-theme_shade slds-theme_alert-texture">
+                        <span>
+                            <strong>Doctor Name: </strong> {doctor.Doctor_Name__c}<br>
+                            <strong>Specialization: </strong> {doctor.Specialization__c}<br>
+
+                        </span>
+                    </div>
+                    <!--div for doctor profile detail ends here -->
+                    <div class="slds-col slds-size_6-of-12 slds-m-around_large">
+                        <span>
+                            <lightning-button variant="brand" label="View Doctor Profile"
+                                onclick={handleViewProfileClick} class="slds-m-left_xx-large"
+                                value={doctor.Id}></lightning-button>
+
+                        </span>
+                    </div>
+                </div>
+            </lightning-card>
+        </template>
+    </template>
+</template>

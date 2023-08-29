@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+<masterLabel>DoctorData</masterLabel>
+<isExposed>true</isExposed>
+<description>Message Channel to pass Doctor data</description>
+<lightningMessageFields>
+<fieldName>doctorDataDetail</fieldName>
+<description>This is the field to pass Doctor data</description>
+</lightningMessageFields>
+</LightningMessageChannel>

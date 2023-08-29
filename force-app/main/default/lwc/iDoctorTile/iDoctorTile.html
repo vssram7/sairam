@@ -1,0 +1,43 @@
+<template>
+    <lightning-card class="slds-c-card-shadow">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col slds-size_2-of-12 slds-m-around_large">
+                <span><img src={doctor.Profile_photo_link__c} /></span>
+            </div>
+            <div
+                class="slds-col slds-size_4-of-12 slds-m-around_large slds-box slds-theme_shade slds-theme_alert-texture">
+                <span>
+                    <strong>Doctor Name: </strong> {doctor.Doctor_Name__c}<br>
+                    <strong>Specialization: </strong> {doctor.Specialization__c}<br>
+                    <strong>Experience: </strong> {doctor.Experience__c} years<br>
+                    <strong>Consultation fee: </strong> ₹ {doctor.Consultation_Fee__c}/-<br>
+                    <strong>Rating: </strong> {doctor.Rating__c}<br>
+                    <strong>Available: </strong> <template lwc:if={doctor.Avalable__c}><img class="imgs"
+                            src="https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/512x512/checkbox.png" /></template>
+                    <template lwc:else><img class="imgs"
+                            src="https://us.123rf.com/450wm/vectora/vectora1704/vectora170401047/75817847-red-cross-symbol-icon-as-delete-remove-fail-failure-or-incorrect-answer-icon.jpg" /></template>
+                </span>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-m-around_large">
+                <span>
+                    <div class="slds-float-bottom">
+                        <lightning-button variant="brand" label="View Doctor Profile" title="View Doctor Profile"
+                            onclick={handleViewProfileClick} class="slds-m-left_x-small"
+                            value={doctor.id}></lightning-button><br><br>
+
+                        <template if:true={doctorAvailable}>
+                            <lightning-button variant="brand" label="Book Appointment" title="Book Appointment"
+                                onclick={handleBookAppointmentClick} class="slds-m-left_x-small"
+                                disabled={bookAppointmentdisable}></lightning-button>
+                        </template>
+                        <template if:false={doctorAvailable}>
+                            <lightning-button variant="brand" label="Book Appointment" title="Book Appointment"
+                                onclick={handleBookAppointmentClick} class="slds-m-left_x-small"
+                                disabled={bookAppointmentdisable}></lightning-button>
+                        </template>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </lightning-card>
+</template>

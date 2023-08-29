@@ -1,0 +1,14 @@
+<template>
+    <lightning-card icon-name="utility:list" title="Doctors List">
+        <div class=" mystyle slds-var-m-around_medium">
+            <lightning-input type="search" onchange={handleKeyChange} class="slds-var-m-bottom_small" label="Search"
+                value={searchKey}></lightning-input>
+        </div>
+    </lightning-card>
+    <template lwc:if={doctors.data}>
+        <template for:each={doctors.data} for:item="doctor">
+            <c-i-doctor-tile class="slds-show slds-is-relative" key={doctor.Id} doctor={doctor}></c-i-doctor-tile>
+        </template>
+    </template>
+
+</template>
