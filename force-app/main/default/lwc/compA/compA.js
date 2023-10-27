@@ -3,7 +3,7 @@
 // import { MessageContext, publish } from 'lightning/messageService'
 // export default class LmsComponentA extends LightningElement {
 //     inputValue
-
+// check
 //     @wire(MessageContext)
 //     context
 
